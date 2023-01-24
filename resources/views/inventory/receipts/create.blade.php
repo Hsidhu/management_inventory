@@ -47,7 +47,7 @@
 
                                 <div class="{{ $errors->has('image') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-image">Image</label>
-                                    <input type="text" name="image" id="input-image" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="image" value="{{ old('image') }}">
+                                    <input type="file" name="image" id="input-image" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="image" value="{{ old('image') }}">
                                     @include('alerts.feedback', ['field' => 'image'])
                                 </div>
 
