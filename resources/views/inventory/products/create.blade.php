@@ -62,7 +62,7 @@
                                         </div>
                                     </div>
                                     <div class="col-4">                                    
-                                        <div class="form-group{{ $errors->has('image') ? ' has-danger' : '' }}">
+                                        <div class="{{ $errors->has('image') ? ' has-danger' : '' }}">
                                             <label class="form-control-label" for="input-image">Image</label>
                                             <input type="file" step=".01" name="image" id="input-image" class="form-control form-control-alternative" placeholder="image" value="{{ old('image') }}" >
                                             @include('alerts.feedback', ['field' => 'image'])
