@@ -50,8 +50,8 @@
         <div class="col-lg-4">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Last Month Income</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-money-coins text-primary"></i>{{ format_money($semesterincomes) }}</h3>
+                    <h5 class="card-category">Last Month Qty used</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-money-coins text-primary"></i>{{ $semesterincomes }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
@@ -63,7 +63,7 @@
         <div class="col-lg-4">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Monthly Qty Balance</h5>
+                    <h5 class="card-category">Monthly Qty Received</h5>
                     <h3 class="card-title"><i class="tim-icons icon-bank text-info"></i> {{ $monthlybalance }}</h3>
                 </div>
                 <div class="card-body">
