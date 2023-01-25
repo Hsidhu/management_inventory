@@ -23,6 +23,18 @@ class Receipt extends Model
         return $this->hasMany('App\ReceivedProduct');
     }
 
+    public function numberOfProducts()
+    {
+        return $this->with(['products' => function($query){
+            $query->groupBy('product_id');
+        }])->count();
+    }
+
+    public function receiptTotal()
+    {
+        return $this->products->sum('price');
+    }
+
     public function transactions() {
         return $this->hasMany('App\Transaction');
     }
