@@ -18,6 +18,7 @@ class CreateProductsTableMigration extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->text('image')->nullable();
+            $table->text('document')->nullable();
             $table->integer('alert_level')->nullable();
             $table->string('barcode')->nullable();
             $table->string('reference')->nullable();
