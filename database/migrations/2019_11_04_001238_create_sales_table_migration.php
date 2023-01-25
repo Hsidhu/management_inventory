@@ -15,6 +15,7 @@ class CreateSalesTableMigration extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->unsignedInteger('user_id');
             $table->timestamp('finalized_at')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
