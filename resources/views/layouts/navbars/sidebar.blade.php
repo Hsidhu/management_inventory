@@ -4,7 +4,7 @@
             <li @if ($pageSlug == 'dashboard') class="active " @endif>
                 <a href="{{ route('home') }}">
                     <i class="tim-icons icon-chart-bar-32"></i>
-                    <p>Dashboard</p>
+                    <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
             <li>
@@ -19,31 +19,31 @@
                         <li @if ($pageSlug == 'tstats') class="active " @endif>
                             <a href="{{ route('transactions.stats')  }}">
                                 <i class="tim-icons icon-chart-pie-36"></i>
-                                <p>Statistics</p>
+                                <span class="nav-link-text">Statistics</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'transactions') class="active " @endif>
                             <a href="{{ route('transactions.index')  }}">
                                 <i class="tim-icons icon-bullet-list-67"></i>
-                                <p>All</p>
+                                <span class="nav-link-text">All</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'sales') class="active " @endif>
                             <a href="{{ route('sales.index')  }}">
                                 <i class="tim-icons icon-bag-16"></i>
-                                <p>Sales</p>
-                            </a>
-                        </li>
-                        <li @if ($pageSlug == 'item_received') class="active " @endif>
-                            <a href="{{ route('transactions.type', ['type' => 'item_received'])  }}">
-                                <i class="tim-icons icon-coins"></i>
-                                <p>Item Received</p>
+                                <span class="nav-link-text">Checkout</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'item_sold') class="active " @endif>
                             <a href="{{ route('transactions.type', ['type' => 'item_sold'])  }}">
                                 <i class="tim-icons icon-credit-card"></i>
-                                <p>Item Used</p>
+                                <span class="nav-link-text">Item Checkout</span>
+                            </a>
+                        </li>
+                        <li @if ($pageSlug == 'item_received') class="active " @endif>
+                            <a href="{{ route('transactions.type', ['type' => 'item_received'])  }}">
+                                <i class="tim-icons icon-coins"></i>
+                                <span class="nav-link-text">Item Received</span>
                             </a>
                         </li>
                     </ul>
@@ -62,25 +62,25 @@
                         <li @if ($pageSlug == 'istats') class="active " @endif>
                             <a href="{{ route('inventory.stats') }}">
                                 <i class="tim-icons icon-chart-pie-36"></i>
-                                <p>Statistics</p>
+                                <span class="nav-link-text">Statistics</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'products') class="active " @endif>
                             <a href="{{ route('products.index') }}">
                                 <i class="tim-icons icon-notes"></i>
-                                <p>Products</p>
+                                <span class="nav-link-text">Products</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'categories') class="active " @endif>
                             <a href="{{ route('categories.index') }}">
                                 <i class="tim-icons icon-tag"></i>
-                                <p>Categoríes</p>
+                                <span class="nav-link-text">Categories</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'receipts') class="active " @endif>
                             <a href="{{ route('receipts.index') }}">
                                 <i class="tim-icons icon-paper"></i>
-                                <p>Receipts</p>
+                                <span class="nav-link-text">Receipts</span>
                             </a>
                         </li>
                     </ul>
@@ -91,7 +91,7 @@
             <li @if ($pageSlug == 'providers') class="active " @endif>
                 <a href="{{ route('providers.index') }}">
                     <i class="tim-icons icon-delivery-fast"></i>
-                    <p>Providers</p>
+                    <span class="nav-link-text">Providers</span>
                 </a>
             </li>
 
@@ -108,19 +108,19 @@
                         <li @if ($pageSlug == 'profile') class="active " @endif>
                             <a href="{{ route('profile.edit')  }}">
                                 <i class="tim-icons icon-badge"></i>
-                                <p>My profile</p>
+                                <span class="nav-link-text">My profile</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users-list') class="active " @endif>
                             <a href="{{ route('users.index')  }}">
                                 <i class="tim-icons icon-notes"></i>
-                                <p>Manage Users</p>
+                                <span class="nav-link-text">Manage Users</span>
                             </a>
                         </li>
                         <li @if ($pageSlug == 'users-create') class="active " @endif>
                             <a href="{{ route('users.create')  }}">
                                 <i class="tim-icons icon-simple-add"></i>
-                                <p>New user</p>
+                                <span class="nav-link-text">New user</span>
                             </a>
                         </li>
                     </ul>
