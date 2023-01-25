@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Sale Summary</h4>
+                            <h4 class="card-title">Checkout Summary</h4>
                         </div>
                         @if (!$sale->finalized_at)
                             <div class="col-4 text-right">
@@ -47,7 +47,9 @@
                                 <td>{{ $sale->user->name }}</td>
                                 <td>{{ $sale->products->count() }}</td>
                                 <td>{{ $sale->products->sum('qty') }}</td>
-                                <td>{!! $sale->finalized_at ? 'Completed at<br>'.date('d-m-y', strtotime($sale->finalized_at)) : (($sale->products->count() > 0) ? 'TO FINALIZE' : 'ON HOLD') !!}</td>
+                                <td>
+                                    {!! $sale->finalized_at ? 'Completed at<br>'.date('d-m-y', strtotime($sale->finalized_at)) : (($sale->products->count() > 0) ? '<span style="color:red; font-weight:bold;">TO FINALIZE</span>' : 'ON HOLD') !!}
+                                </td>
                             </tr>
                         </tbody>
                     </table>
