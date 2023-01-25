@@ -5,7 +5,8 @@ use App\Sale;
 use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
-use App\PaymentMethod;
+use App\ReceivedProduct;
+use App\Provider;
 
 class HomeController extends Controller
 {
@@ -17,19 +18,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        $monthlyBalanceByMethod = $this->getMethodBalance()->get('monthlyBalanceByMethod');
-        $monthlyBalance = $this->getMethodBalance()->get('monthlyBalance');
-
-        $anualsales = $this->getAnnualSales();
-        $anualproducts = $this->getAnnualProducts();
+        $monthlyBalanceByMethod = $this->getMonthlyBalance()->get('monthlyBalanceByMethod');
+        $monthlyBalance = $this->getMonthlyBalance()->get('monthlyBalance');
         
         return view('dashboard', [
             'monthlybalance'            => $monthlyBalance,
             'monthlybalancebymethod'    => $monthlyBalanceByMethod,
             'lasttransactions'          => Transaction::latest()->limit(20)->get(),
             'unfinishedsales'           => Sale::where('finalized_at', null)->get(),
-            'anualsales'                => $anualsales,
-            'anualproducts'             => $anualproducts,
+            'anualsales'                => $this->getAnnualSales(),
+            'anualproducts'             => $this->getAnnualProducts(),
+            'anualProviders'            => $this->getAnnualProviders(),
             'lastmonths'                => array_reverse($this->getMonthlyTransactions()->get('lastmonths')),
             'lastincomes'               => $this->getMonthlyTransactions()->get('lastincomes'),
             'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
@@ -38,7 +37,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function getMethodBalance()
+    public function getMonthlyBalance()
     {
         $methods = ['item_sold', 'item_received'];
         $monthlyBalanceByMethod = [];
@@ -74,6 +73,17 @@ class HomeController extends Controller
         return "[" . implode(',', $products) . "]";
     }
 
+    public function getAnnualProviders()
+    {
+        $products = [];
+        foreach(range(1, 12) as $i) { 
+            $monthproducts = Provider::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
+
+            array_push($products, $monthproducts);
+        }
+        return "[" . implode(',', $products) . "]";
+    }
+
     public function getMonthlyTransactions()
     {
         $actualmonth = Carbon::now();
@@ -96,13 +106,17 @@ class HomeController extends Controller
             $semesterincomes += $incomes;
             $lastincomes = round($incomes).','.$lastincomes;
 
-            // product recivied
+            // product purshased
             $expenses = abs(Transaction::whereIn('type', ['item_received'])
                 ->whereYear('created_at', $actualmonth->year)
-                ->WhereMonth('created_at', $actualmonth->month)
+                ->whereMonth('created_at', $actualmonth->month)
                 ->sum('qty'));
-
-            $semesterexpenses += $expenses;
+            
+            // amount spend to buy products
+            $semesterexpenses += abs(ReceivedProduct::whereYear('created_at', $actualmonth->year)
+                ->whereMonth('created_at', $actualmonth->month)
+                ->sum('price'));
+            
             $lastexpenses = round($expenses).','.$lastexpenses;
 
             $actualmonth->subMonth(1);
