@@ -102,7 +102,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-8">
-                        <h4 class="card-title">Sales Statistics</h4>
+                        <h4 class="card-title">Checkout Statistics</h4>
                     </div>
                     <div class="col-4 text-right">
                         <a href="{{ route('sales.index') }}" class="btn btn-sm btn-primary">View Sales</a>
@@ -114,10 +114,7 @@
                     <thead>
                         <th>Period</th>
                         <th>Sales</th>
-                        <th>Clients</th>
-                        <th>Total Stock</th>
-                        <th data-toggle="tooltip" data-placement="bottom" title="Promedio de ingresos por cada venta">Average C / V</th>
-                        <th>Billed Amount</th>
+                        <th>Qty</th>
                         <th>To Finalize</th>
                     </thead>
                     <tbody>
@@ -125,10 +122,7 @@
                             <tr>
                                 <td>{{ $period }}</td>
                                 <td>{{ $data->count() }}</td>
-                                <td>{{ $data->groupBy('client_id')->count() }}</td>
                                 <td>{{ $data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('qty');})->sum() }}</td>
-                                <td>{{ format_money($data->avg('total_amount')) }}</td>
-                                <td>{{ format_money($data->where('finalized_at', '!=', null)->map(function ($sale) {return $sale->products->sum('total_amount');})->sum()) }}</td>
                                 <td>{{ $data->where('finalized_at', null)->count() }}</td>
                             </tr>
                         @endforeach
