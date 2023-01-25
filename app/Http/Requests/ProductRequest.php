@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\CurrentPasswordCheckRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductRequest extends FormRequest
@@ -27,8 +26,8 @@ class ProductRequest extends FormRequest
         return [
             'name' => ['required'],
             'product_category_id' => ['required'],
-            'description' => [],
-            'alert_level' => ['required']
+            'alert_level' => ['required'],
+            'image' => 'mimes:jpeg,jpg,png|max:6000'
         ];
     }
 
