@@ -20,6 +20,7 @@ class CreateProductsTableMigration extends Migration
             $table->text('image')->nullable();
             $table->integer('alert_level')->nullable();
             $table->string('barcode')->nullable();
+            $table->string('reference')->nullable();
             $table->unsignedinteger('product_category_id');
             
             $table->timestamps();
