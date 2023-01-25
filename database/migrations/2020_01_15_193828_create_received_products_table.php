@@ -19,6 +19,7 @@ class CreateReceivedProductsTable extends Migration
             $table->unsignedInteger('product_id');
             $table->integer('stock');
             $table->integer('stock_defective');
+            $table->timestamp('expired_at')->nullable();
             $table->decimal('price', 10, 2);
             $table->foreign('receipt_id')->references('id')->on('receipts')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products');
