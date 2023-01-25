@@ -28,7 +28,7 @@
                             </label>
                             <label class="btn btn-sm btn-primary btn-simple" id="2">
                                 <input type="radio" class="d-none" name="options">
-                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Clients</span>
+                                <span class="d-none d-sm-block d-md-block d-lg-block d-xl-block">Providers</span>
                                 <span class="d-block d-sm-none">
                                     <i class="tim-icons icon-tap-02"></i>
                                 </span>
@@ -63,8 +63,8 @@
         <div class="col-lg-4">
             <div class="card card-chart">
                 <div class="card-header">
-                    <h5 class="card-category">Monthly Balance</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-bank text-info"></i> {{ format_money($monthlybalance) }}</h3>
+                    <h5 class="card-category">Monthly Qty Balance</h5>
+                    <h3 class="card-title"><i class="tim-icons icon-bank text-info"></i> {{ $monthlybalance }}</h3>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
@@ -77,7 +77,10 @@
             <div class="card card-chart">
                 <div class="card-header">
                     <h5 class="card-category">Expenditures Last Month</h5>
-                    <h3 class="card-title"><i class="tim-icons icon-paper text-success"></i> {{ format_money($semesterexpenses) }}</h3>
+                    <h3 class="card-title">
+                        <i class="tim-icons icon-paper text-success"></i> 
+                        {{ format_money($semesterexpenses) }}
+                    </h3>
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
@@ -97,7 +100,7 @@
                             <h4 class="card-title">Pending Checkouts</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">New Sale</a>
+                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Checkout</a>
                         </div>
                     </div>
                 </div>
@@ -110,13 +113,10 @@
                                         Date
                                     </th>
                                     <th>
-                                        Client
-                                    </th>
-                                    <th>
                                         Products
                                     </th>
                                     <th>
-                                        Paid out
+                                        Checkout Qty
                                     </th>
                                     <th>
                                         Total
@@ -130,10 +130,8 @@
                                 @foreach ($unfinishedsales as $sale)
                                     <tr>
                                         <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
-                                        <td><a href="">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>
                                         <td>{{ $sale->products->count() }}</td>
-                                        <td>{{ format_money($sale->transactions->sum('amount')) }}</td>
-                                        <td>{{ format_money($sale->products->sum('total_amount')) }}</td>
+                                        <td>{{ $sale->products->sum('qty') }}</td>
                                         <td class="td-actions text-right">
                                             <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
                                                 <i class="tim-icons icon-zoom-split"></i>
@@ -240,8 +238,9 @@
 
         var lastincomes = {{ $lastincomes }};
         var lastexpenses = {{ $lastexpenses }};
-        var anualsales = {{ $anualsales }};
-        var anualproducts = {{ $anualproducts }};
+        var anualsales = {{ $anualsales }}; // number of checkout
+        var anualproducts = {{ $anualproducts }}; // qty users
+        var anualProviders = {{$anualProviders}}
         var methods = [];
         var methods_stats = [];
 
