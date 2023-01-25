@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Sale;
 use Carbon\Carbon;
-use App\SoldProduct;
 use App\Transaction;
 use App\Provider;
 use Illuminate\Http\Request;
@@ -55,7 +54,7 @@ class TransactionController extends Controller
         $transactionsperiods['Year'] = Transaction::whereYear('created_at', Carbon::now()->year)->get();
 
         return view('transactions.stats', [
-            'providers'               => Provider::all(),
+            'providers'             => Provider::all(),
             'salesperiods'          => $salesperiods,
             'transactionsperiods'   => $transactionsperiods,
             'date'                  => Carbon::now(),
