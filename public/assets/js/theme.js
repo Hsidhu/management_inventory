@@ -264,7 +264,7 @@ demo = {
         });
 
         $("#2").click(function () {
-            var chart_data = anualclients;
+            var chart_data = anualProviders;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;
