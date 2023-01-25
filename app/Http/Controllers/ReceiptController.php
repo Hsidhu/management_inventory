@@ -48,6 +48,12 @@ class ReceiptController extends Controller
      */
     public function store(Request $request, Receipt $receipt)
     {
+        $request->validate([
+            'title' => 'required',
+            'provider_id' => 'required',
+            'image' => 'mimes:jpg,png,jpeg|max:6000',
+        ]);
+
         $receipt = $receipt->create($request->all());
 
         return redirect()
