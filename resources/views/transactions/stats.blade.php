@@ -21,8 +21,8 @@
                             <thead>
                                 <th>Period</th>
                                 <th>Transactions</th>
-                                <th>Income</th>
-                                <th>Expenses</th>
+                                <th>Checkout</th>
+                                <th>Received</th>
                                 <th>Total balance</th>
                                 <th></th>
                             </thead>
@@ -60,17 +60,28 @@
                             <thead>
                                 <th>Provider</th>
                                 <th>Purchases</th>
-                                <th>Transactions</th>
+                                <th>Number of Product</th>
+                                <th>Total money spend</th>
                                 <th></th>
                             </thead>
                             <tbody>
                                 @foreach($providers as $provider)
+                                    <?php
+                                    $productNum=0;
+                                    $cost=0;
+                                        foreach($provider->receipts as $receipt)
+                                        {
+                                            $productNum += $receipt->numberOfProducts();
+                                            $cost += $receipt->receiptTotal();
+                                        }
+                                    ?>
                                     <tr>
                                         <td><a href="{{ route('providers.show', $provider) }}">{{ $provider->name }}</a></td>
-                                        <td>Total money spend with this provider</td>
                                         <td>{{ $provider->receipts->count() }}</td>
+                                        <td>{{ $productNum ?? 0 }}</td>
+                                        <td>{{ $cost ?? 0 }}</td>
                                         <td>
-                                            <a href="{{ route('providers.show', $provider) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="See Client">
+                                            <a href="{{ route('providers.show', $provider) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="See Provider">
                                                 <i class="tim-icons icon-zoom-split"></i>
                                             </a>
                                         </td>
