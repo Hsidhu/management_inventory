@@ -20,11 +20,9 @@
                         <table class="table">
                             <thead>
                                 <th>Date</th>
-                                <th>Client</th>
                                 <th>User</th>
                                 <th>Products</th>
                                 <th>Total Stock</th>
-                                <th>Total Amount</th>
                                 <th>Status</th>
                                 <th></th>
                             </thead>
@@ -32,11 +30,9 @@
                                 @foreach ($sales as $sale)
                                     <tr>
                                         <td>{{ date('d-m-y', strtotime($sale->created_at)) }}</td>
-                                        <td><a href="{{ route('clients.show', $sale->client) }}">{{ $sale->client->name }}<br>{{ $sale->client->document_type }}-{{ $sale->client->document_id }}</a></td>
                                         <td>{{ $sale->user->name }}</td>
                                         <td>{{ $sale->products->count() }}</td>
                                         <td>{{ $sale->products->sum('qty') }}</td>
-                                        <td>{{ format_money($sale->transactions->sum('amount')) }}</td>
                                         <td>
                                             @if (!$sale->finalized_at)
                                                 <span class="text-danger">To Finalize</span>
