@@ -80,9 +80,9 @@ class ProductController extends Controller
     {
         $solds = $product->solds()->latest()->limit(25)->get();
 
-        $receiveds = $product->receiveds()->latest()->limit(25)->get();
+        $productReceived = $product->received()->latest()->limit(25)->get();
 
-        return view('inventory.products.show', compact('product', 'solds', 'receiveds'));
+        return view('inventory.products.show', compact('product', 'solds', 'productReceived'));
     }
 
     /**
