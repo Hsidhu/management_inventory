@@ -50,7 +50,7 @@
                             <thead>
                                 <th>ID</th>
                                 <th>Category</th>
-                                <th>Name</th>
+                                <th>Product</th>
                                 <th>Qty Used</th>
                             </thead>
                             <tbody>
@@ -60,7 +60,6 @@
                                         <td><a href="{{ route('categories.show', $soldproduct->product->category) }}">{{ $soldproduct->product->category->name }}</a></td>
                                         <td><a href="{{ route('products.show', $soldproduct->product) }}">{{ $soldproduct->product->name }}</a></td>
                                         <td>{{ $soldproduct->total_qty }}</td>
-                                        <td>{{ format_money($soldproduct->incomes) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -80,7 +79,7 @@
                             <thead>
                                 <th>ID</th>
                                 <th>Category</th>
-                                <th>Name</th>
+                                <th>Product</th>
                                 <th>Stocked</th>
                                 <th>Average Price</th>
                             </thead>
