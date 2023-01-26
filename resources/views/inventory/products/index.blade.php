@@ -24,7 +24,7 @@
                                 <th scope="col">Product</th>
                                 <th scope="col">Stock</th>
                                 <th scope="col">Faulty</th>
-                                <th scope="col">Total Sold</th>
+                                <th scope="col">Total Checkout</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
