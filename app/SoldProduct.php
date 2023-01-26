@@ -17,5 +17,10 @@ class SoldProduct extends Model
     {
         return $this->belongsTo('App\Sale');
     }
+
+    public function received()
+    {
+        return $this->belongsTo('App\ReceivedProduct');
+    }
     
 }
