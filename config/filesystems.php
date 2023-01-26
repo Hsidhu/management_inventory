@@ -66,4 +66,10 @@ return [
 
     ],
 
+    'links' => [
+        public_path('storage') => storage_path('app/public'),
+        public_path('product_images') => storage_path('app/public/products/images'),
+        public_path('product_documents') => storage_path('app/public/products/documents'),
+    ],
+
 ];

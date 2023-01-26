@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Income</h4>
+                            <h4 class="card-title">Checkout</h4>
                         </div>
                         <div class="col-4 text-right">
                             <a href="{{ route('transactions.create', ['type' => 'income']) }}" class="btn btn-sm btn-primary">Register Income</a>
@@ -23,7 +23,6 @@
                                 <th scope="col">Date</th>
                                 <th scope="col">Product name</th>
                                 <th scope="col">Qty</th>
-                                <th scope="col">Reference</th>
                                 <th scope="col"></th>
                             </thead>
                             <tbody>
@@ -32,7 +31,6 @@
                                         <td> {{ date('d-m-y', strtotime($transaction->created_at)) }}</td>
                                         <td> {{ $transaction->soldProduct->product->name }}</td>
                                         <td>{{ $transaction->qty }}</td>
-                                        <td></td>
                                         <td class="td-actions text-right">
                                             @if ($transaction->sale_id)
                                                 <a href="{{ route('sales.show', $transaction->sale_id) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="More Details">

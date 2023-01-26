@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use App\SoldProduct;
 use App\Transaction;
 use App\ReceivedProduct;
-use App\Provider;
+use App\Receipt;
 
 class HomeController extends Controller
 {
@@ -22,13 +22,13 @@ class HomeController extends Controller
         $monthlyBalance = $this->getMonthlyBalance()->get('monthlyBalance');
         
         return view('dashboard', [
+            'anualProductsUsage'        => $this->getAnnualProductsUsage(),
+            'anualProductsReceived'     => $this->getAnnualReceived(),
+            'anualOrders'               => $this->getAnnualOrders(),
             'monthlybalance'            => $monthlyBalance,
             'monthlybalancebymethod'    => $monthlyBalanceByMethod,
             'lasttransactions'          => Transaction::latest()->limit(20)->get(),
             'unfinishedsales'           => Sale::where('finalized_at', null)->get(),
-            'anualsales'                => $this->getAnnualSales(),
-            'anualproducts'             => $this->getAnnualProducts(),
-            'anualProviders'            => $this->getAnnualProviders(),
             'lastmonths'                => array_reverse($this->getMonthlyTransactions()->get('lastmonths')),
             'lastincomes'               => $this->getMonthlyTransactions()->get('lastincomes'),
             'lastexpenses'              => $this->getMonthlyTransactions()->get('lastexpenses'),
@@ -39,30 +39,19 @@ class HomeController extends Controller
 
     public function getMonthlyBalance()
     {
-        $methods = ['item_sold', 'item_received'];
+        $methods = ['item_sold'=> 'Qty used', 'item_received' => 'Qty received'];
         $monthlyBalanceByMethod = [];
         $monthlyBalance = 0;
 
-        foreach ($methods as $method) {
-            $balance = Transaction::where('type', $method)->thisMonth()->sum('qty');
+        foreach ($methods as $key => $method) {
+            $balance = Transaction::where('type', $key)->thisMonth()->sum('qty');
             $monthlyBalance += (float) $balance;
             $monthlyBalanceByMethod[$method] = $balance;
         }
         return collect(compact('monthlyBalanceByMethod', 'monthlyBalance'));
     }
 
-    public function getAnnualSales()
-    {
-        $sales = [];
-        foreach(range(1, 12) as $i) {
-            $monthlySalesCount = Sale::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
-
-            array_push($sales, $monthlySalesCount);
-        }
-        return "[" . implode(',', $sales) . "]";
-    }
-
-    public function getAnnualProducts()
+    public function getAnnualProductsUsage()
     {
         $products = [];
         foreach(range(1, 12) as $i) { 
@@ -73,11 +62,22 @@ class HomeController extends Controller
         return "[" . implode(',', $products) . "]";
     }
 
-    public function getAnnualProviders()
+    public function getAnnualReceived()
+    {
+        $sales = [];
+        foreach(range(1, 12) as $i) {
+            $monthlySalesCount = ReceivedProduct::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->sum('stock');
+
+            array_push($sales, $monthlySalesCount);
+        }
+        return "[" . implode(',', $sales) . "]";
+    }
+
+    public function getAnnualOrders()
     {
         $products = [];
         foreach(range(1, 12) as $i) { 
-            $monthproducts = Provider::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
+            $monthproducts = Receipt::whereYear('created_at', Carbon::now()->year)->whereMonth('created_at', $i)->count();
 
             array_push($products, $monthproducts);
         }

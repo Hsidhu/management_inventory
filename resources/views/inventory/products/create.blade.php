@@ -43,7 +43,7 @@
 
                                 <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
                                     <label class="form-control-label" for="input-description">Description</label>
-                                    <input type="text" name="description" id="input-description" class="form-control form-control-alternative" placeholder="Description" value="{{ old('description') }}" required>
+                                    <input type="text" name="description" id="input-description" class="form-control form-control-alternative" placeholder="Description" value="{{ old('description') }}" >
                                     @include('alerts.feedback', ['field' => 'description'])
                                 </div>
                                 <div class="row">
@@ -56,18 +56,35 @@
                                     </div>                            
                                     <div class="col-4">                                    
                                         <div class="form-group{{ $errors->has('barcode') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-barcode">Defective Stock</label>
+                                            <label class="form-control-label" for="input-barcode">Barcode</label>
                                             <input type="number" name="barcode" id="input-barcode" class="form-control form-control-alternative" placeholder="Barcode" value="{{ old('barcode') }}" >
                                             @include('alerts.feedback', ['field' => 'barcode'])
                                         </div>
                                     </div>
                                     <div class="col-4">                                    
-                                        <div class="{{ $errors->has('image') ? ' has-danger' : '' }}">
-                                            <label class="form-control-label" for="input-image">Image</label>
-                                            <input type="file" step=".01" name="image" id="input-image" class="form-control form-control-alternative" placeholder="image" value="{{ old('image') }}" >
-                                            @include('alerts.feedback', ['field' => 'image'])
+                                        <div class="{{ $errors->has('reference') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-reference">Reference/SKU#</label>
+                                            <input type="number" step=".01" name="reference" id="input-reference" class="form-control form-control-alternative" placeholder="Reference" value="{{ old('reference') }}" >
+                                            @include('alerts.feedback', ['field' => 'reference'])
                                         </div>
                                     </div>                            
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="{{ $errors->has('image_file') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-image">Image (PNG, JPG)</label>
+                                            <input type="file" name="image_file" id="input-image" class="form-control form-control-alternative" placeholder="image_file" value="{{ old('image_file') }}" >
+                                            @include('alerts.feedback', ['field' => 'image_file'])
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="{{ $errors->has('document_file') ? ' has-danger' : '' }}">
+                                            <label class="form-control-label" for="input-document">Document (PDF)</label>
+                                            <input type="file" step=".01" name="document_file" id="input-image" class="form-control form-control-alternative" placeholder="Document" value="{{ old('document_file') }}" >
+                                            @include('alerts.feedback', ['field' => 'document_file'])
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="text-center">

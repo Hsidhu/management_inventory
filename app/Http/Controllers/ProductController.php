@@ -43,20 +43,15 @@ class ProductController extends Controller
     public function store(ProductRequest $request, Product $model)
     {
 
-        if($request->hasFile('image'))
+        if($request->hasFile('image_file'))
         {
-            // Get filename with the extension
-            $filenameWithExt = $request->file('image')->getClientOriginalName();
-            //Get just filename
-            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-            // Get just ext
-            $extension = $request->file('image')->getClientOriginalExtension();
-            // Filename to store
-            $fileNameToStore = $filename.'_'.time().'.'.$extension;
-            // Upload Image
-            $path = $request->file('image')->storeAs('public/products', $fileNameToStore);
-            // set file_name
-            $request->request->add(['image' => "products/".$fileNameToStore]);
+            $fileNameToStore = $this->uploadImage($request);
+            $request->request->add(['image' => $fileNameToStore]);
+        }
+        if($request->hasFile('document_file'))
+        {
+            $fileNameToStore = $this->uploadDocument($request);
+            $request->request->add(['document' => $fileNameToStore]);
         }
 
         $product_id = $model->create($request->all())->id;
@@ -127,5 +122,37 @@ class ProductController extends Controller
         return redirect()
             ->route('products.index')
             ->withStatus('Product removed successfully.');
+    }
+
+    protected function uploadImage($request)
+    {
+        // Get filename with the extension
+        $filenameWithExt = $request->file('image_file')->getClientOriginalName();
+        //Get just filename
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // Get just ext
+        $extension = $request->file('image_file')->getClientOriginalExtension();
+        // Filename to store
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        
+        $path = $request->file('image_file')->storeAs('public/products/images', $fileNameToStore);
+
+        return "products/images/".$fileNameToStore;
+    }
+
+    protected function uploadDocument($request)
+    {
+        // Get filename with the extension
+        $filenameWithExt = $request->file('document_file')->getClientOriginalName();
+        //Get just filename
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // Get just ext
+        $extension = $request->file('document_file')->getClientOriginalExtension();
+        // Filename to store
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        
+        $path = $request->file('document_file')->storeAs('public/products/documents', $fileNameToStore);
+        
+        return "products/documents/".$fileNameToStore;
     }
 }

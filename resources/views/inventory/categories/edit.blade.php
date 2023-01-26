@@ -28,6 +28,12 @@
                                     @include('alerts.feedback', ['field' => 'name'])
                                 </div>
 
+                                <div class="form-group{{ $errors->has('description') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-description">Description</label>
+                                    <input type="text" name="description" id="input-description" class="form-control form-control-alternative{{ $errors->has('description') ? ' is-invalid' : '' }}" placeholder="Description" value="{{ old('description', $category->description) }}">
+                                    @include('alerts.feedback', ['field' => 'description'])
+                                </div>
+
 
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-success mt-4">Save</button>

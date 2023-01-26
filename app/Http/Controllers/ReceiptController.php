@@ -54,6 +54,12 @@ class ReceiptController extends Controller
             'image' => 'mimes:jpg,png,jpeg|max:6000',
         ]);
 
+        if($request->hasFile('image_file'))
+        {
+            $fileNameToStore = $this->uploadImage($request);
+            $request->request->add(['image' => $fileNameToStore]);
+        }
+
         $receipt = $receipt->create($request->all());
 
         return redirect()
@@ -187,5 +193,21 @@ class ReceiptController extends Controller
         return redirect()
             ->route('receipts.show', $receipt)
             ->withStatus('Product removed successfully.');
+    }
+
+    protected function uploadImage($request)
+    {
+        // Get filename with the extension
+        $filenameWithExt = $request->file('image_file')->getClientOriginalName();
+        //Get just filename
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // Get just ext
+        $extension = $request->file('image_file')->getClientOriginalExtension();
+        // Filename to store
+        $fileNameToStore = $filename.'_'.time().'.'.$extension;
+        
+        $path = $request->file('image_file')->storeAs('public/receipt', $fileNameToStore);
+
+        return "receipts/".$fileNameToStore;
     }
 }

@@ -241,7 +241,7 @@ demo = {
                     pointHoverRadius: 4,
                     pointHoverBorderWidth: 15,
                     pointRadius: 4,
-                    data: anualproducts,
+                    data: anualProductsUsage,
                 }]
             },
             options: gradientChartOptionsConfigurationWithTooltipPurple
@@ -249,14 +249,14 @@ demo = {
         
         var myChartData = new Chart(ctx, config);
         $("#0").click(function () {
-            var chart_data = anualproducts;
+            var chart_data = anualProductsUsage;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;
             myChartData.update();
         });
         $("#1").click(function () {
-            var chart_data = anualsales;
+            var chart_data = anualProductsReceived;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;
@@ -264,7 +264,7 @@ demo = {
         });
 
         $("#2").click(function () {
-            var chart_data = anualProviders;
+            var chart_data = anualOrders;
             var data = myChartData.config.data;
             data.datasets[0].data = chart_data;
             data.labels = chart_labels;

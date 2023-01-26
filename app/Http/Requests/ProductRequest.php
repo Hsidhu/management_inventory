@@ -27,7 +27,8 @@ class ProductRequest extends FormRequest
             'name' => ['required'],
             'product_category_id' => ['required'],
             'alert_level' => ['required'],
-            'image' => 'mimes:jpeg,jpg,png|max:6000'
+            'image_file' => 'mimes:jpeg,jpg,png|max:6000',
+            'document_file' => 'mimes:pdf,csv|max:6000'
         ];
     }
 

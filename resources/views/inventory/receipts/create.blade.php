@@ -15,6 +15,7 @@
                                 <a href="{{ route('receipts.index') }}" class="btn btn-sm btn-primary">Back to List</a>
                             </div>
                         </div>
+                        <a href="{{asset('product_documents/batch_id_17453_20211128_1674704828.pdf')}}"> download</a>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ route('receipts.store') }}" autocomplete="off">
@@ -45,10 +46,10 @@
                                     @include('alerts.feedback', ['field' => 'provider_id'])
                                 </div>
 
-                                <div class="{{ $errors->has('image') ? ' has-danger' : '' }}">
-                                    <label class="form-control-label" for="input-image">Image</label>
-                                    <input type="file" name="image" id="input-image" class="form-control form-control-alternative{{ $errors->has('image') ? ' is-invalid' : '' }}" placeholder="image" value="{{ old('image') }}">
-                                    @include('alerts.feedback', ['field' => 'image'])
+                                <div class="{{ $errors->has('image_file') ? ' has-danger' : '' }}">
+                                    <label class="form-control-label" for="input-image_file">Image</label>
+                                    <input type="file" name="image_file" id="input-image_file" class="form-control form-control-alternative{{ $errors->has('image_file') ? ' is-invalid' : '' }}" placeholder="Receipt" value="{{ old('image_file') }}">
+                                    @include('alerts.feedback', ['field' => 'image_file'])
                                 </div>
 
                                 <div class="text-center">

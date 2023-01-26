@@ -1,1 +1,1 @@
-## Laravel Inventory
+## Manage inventory
