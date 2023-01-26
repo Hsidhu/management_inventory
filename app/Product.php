@@ -27,7 +27,7 @@ class Product extends Model
         return $this->hasMany('App\SoldProduct');
     }
 
-    public function receiveds()
+    public function received()
     {
         return $this->hasMany('App\ReceivedProduct');
     }
