@@ -5,7 +5,14 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Category Information</h4>
+                    <div class="row">
+                        <div class="col-8">
+                            <h4 class="card-title">Category Information</h4>
+                        </div>
+                        <div class="col-4 text-right">
+                            <a href="{{ route('categories.index') }}" class="btn btn-sm btn-primary">Category List</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table">
@@ -22,9 +29,9 @@
                                 <td>{{ $category->id }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->products->count() }}</td>
-                                <td>{{ $category->products->sum('stock') }}</td>
-                                <td>{{ $category->products->sum('stock_defective') }}</td>
-                                <td>${{ round($category->products->avg('price'), 2) }}</td>
+                                <td>{{ $category->products->map(function ($product) {return $product->balance->stock;})->sum() }}</td>
+                                <td>{{ $category->products->map(function ($product) {return $product->balance->stock_defective;})->sum() }}</td>
+                                <td>${{ round($category->products->map(function ($product) {return $product->received->avg('price');})->sum(), 2) }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -45,7 +52,6 @@
                             <th>Name</th>
                             <th>Stock</th>
                             <th>Defective Stock</th>
-                            <th>Base price</th>
                             <th>Average Price</th>
                             <th>Total sales</th>
                             <th>Income Produced</th>
@@ -58,7 +64,6 @@
                                     <td><a href="{{ route('products.show', $product) }}">{{ $product->name }}</a></td>
                                     <td>{{ $product->stock }}</td>
                                     <td>{{ $product->stock_defective }}</td>
-                                    <td>{{ format_money($product->price) }}</td>
                                     <td>{{ format_money($product->solds->avg('price')) }}</td>
                                     <td>{{ $product->solds->sum('qty') }}</td>
                                     <td>{{ format_money($product->solds->sum('total_amount')) }}</td>
