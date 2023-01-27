@@ -2,7 +2,6 @@
 
 use Illuminate\Database\Seeder;
 use App\User;
-use App\Seeder\ProductSeeder;
 
 //php artisan db:seed --class=DatabaseSeeder
 class DatabaseSeeder extends Seeder
@@ -32,6 +31,5 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123456')
         ]);
 
-        $this->call(ProductSeeder::class);
     }
 }

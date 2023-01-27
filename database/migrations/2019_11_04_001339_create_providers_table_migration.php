@@ -17,7 +17,7 @@ class CreateProvidersTableMigration extends Migration
             $table->increments('id');
             $table->string('name');
             $table->text('description')->nullable();
-            $table->text('webiste')->nullable();
+            $table->text('website')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->timestamps();
