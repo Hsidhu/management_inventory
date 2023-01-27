@@ -32,6 +32,8 @@ class CreateSoldProductsTableMigration extends Migration
      */
     public function down()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('sold_products');
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

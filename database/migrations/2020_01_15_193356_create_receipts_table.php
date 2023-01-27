@@ -17,7 +17,7 @@ class CreateReceiptsTable extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('image')->nullable();
-            $table->unsignedInteger('provider_id')->nullable();
+            $table->unsignedInteger('provider_id');
             $table->unsignedInteger('user_id');
             $table->timestamp('finalized_at')->nullable();
             $table->foreign('provider_id')->references('id')->on('providers');
@@ -33,6 +33,8 @@ class CreateReceiptsTable extends Migration
      */
     public function down()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('receipts');
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

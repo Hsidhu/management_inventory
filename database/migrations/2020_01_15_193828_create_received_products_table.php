@@ -34,6 +34,8 @@ class CreateReceivedProductsTable extends Migration
      */
     public function down()
     {
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 0');
         Schema::dropIfExists('received_products');
+        \DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }
 }

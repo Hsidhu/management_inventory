@@ -10,7 +10,7 @@
                             <h4 class="card-title">Checkout</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('transactions.create', ['type' => 'income']) }}" class="btn btn-sm btn-primary">Register Income</a>
+                            <a href="{{ route('transactions.index') }}" class="btn btn-sm btn-primary">Back to Transactions</a>
                         </div>
                     </div>
                 </div>

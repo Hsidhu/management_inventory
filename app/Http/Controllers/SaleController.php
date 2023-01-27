@@ -115,6 +115,18 @@ class SaleController extends Controller
 
     public function storeproduct(Request $request, Sale $sale, SoldProduct $soldProduct)
     {
+        $product = Product::where('id', $request->get('product_id'))->first();
+
+        if($request->get('qty') > $product->balance->stock) 
+                return back()->withError("The product '$product->name' does not have enough stock. Only has ".$product->balance->stock." units.");
+        return;
+
+        foreach ($sale->products as $sold_product) {
+            $product_name = $sold_product->product->name;
+            $product_stock = $sold_product->product->balance->stock;
+            }
+
+
         $soldProduct->create($request->all());
 
         return redirect()

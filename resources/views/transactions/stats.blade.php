@@ -45,7 +45,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card card-tasks">
                 <div class="card-header">
                     <div class="row">
@@ -79,7 +79,7 @@
                                         <td><a href="{{ route('providers.show', $provider) }}">{{ $provider->name }}</a></td>
                                         <td>{{ $provider->receipts->count() }}</td>
                                         <td>{{ $productNum ?? 0 }}</td>
-                                        <td>{{ $cost ?? 0 }}</td>
+                                        <td>{{ format_money($cost ?? 0) }}</td>
                                         <td>
                                             <a href="{{ route('providers.show', $provider) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="See Provider">
                                                 <i class="tim-icons icon-zoom-split"></i>
@@ -105,7 +105,7 @@
                         <h4 class="card-title">Checkout Statistics</h4>
                     </div>
                     <div class="col-4 text-right">
-                        <a href="{{ route('sales.index') }}" class="btn btn-sm btn-primary">View Sales</a>
+                        <a href="{{ route('sales.index') }}" class="btn btn-sm btn-primary">View Checkouts</a>
                     </div>
                 </div>
             </div>

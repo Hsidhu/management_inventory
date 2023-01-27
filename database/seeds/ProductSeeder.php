@@ -1,12 +1,14 @@
 <?php
 
+namespace App\Seeder;
+
 use Illuminate\Database\Seeder;
 use App\ProductCategory;
 use App\Product;
 use App\ProductBalance;
 use App\Provider;
 
-
+// php artisan db:seed --class=ProductSeeder
 // /Applications/MAMP/bin/php/php7.4.21/bin/php artisan db:seed --class=ProductSeeder
 class ProductSeeder extends Seeder
 {

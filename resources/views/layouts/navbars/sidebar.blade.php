@@ -7,6 +7,12 @@
                     <span class="nav-link-text">Dashboard</span>
                 </a>
             </li>
+            <li @if ($pageSlug == 'sales') class="active " @endif>
+                <a href="{{ route('sales.index')  }}">
+                    <i class="tim-icons icon-bag-16"></i>
+                    <span class="nav-link-text">Checkout</span>
+                </a>
+            </li>
             <li>
                 <a data-toggle="collapse" href="#transactions" {{ $section == 'transactions' ? 'aria-expanded=true' : '' }}>
                     <i class="tim-icons icon-bank" ></i>
@@ -28,12 +34,7 @@
                                 <span class="nav-link-text">All</span>
                             </a>
                         </li>
-                        <li @if ($pageSlug == 'sales') class="active " @endif>
-                            <a href="{{ route('sales.index')  }}">
-                                <i class="tim-icons icon-bag-16"></i>
-                                <span class="nav-link-text">Checkout</span>
-                            </a>
-                        </li>
+                        
                         <li @if ($pageSlug == 'item_sold') class="active " @endif>
                             <a href="{{ route('transactions.type', ['type' => 'item_sold'])  }}">
                                 <i class="tim-icons icon-credit-card"></i>

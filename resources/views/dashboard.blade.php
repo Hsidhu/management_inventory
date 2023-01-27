@@ -7,7 +7,7 @@
                 <div class="card-header ">
                     <div class="row">
                         <div class="col-sm-6 text-left">
-                            <h5 class="card-category">Total sales</h5>
+                            <h5 class="card-category">Total Qty</h5>
                             <h2 class="card-title">Annual yield</h2>
                         </div>
                         <div class="col-sm-6">
@@ -123,9 +123,15 @@
                                         <td>{{ $sale->products->count() }}</td>
                                         <td>{{ $sale->products->sum('qty') }}</td>
                                         <td class="td-actions text-right">
-                                            <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
-                                                <i class="tim-icons icon-zoom-split"></i>
-                                            </a>
+                                            @if (!$sale->finalized_at)
+                                                <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Edit Sale">
+                                                    <i class="tim-icons icon-pencil"></i>
+                                                </a>
+                                            @else
+                                                <a href="{{ route('sales.show', ['sale' => $sale]) }}" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="View Sale">
+                                                    <i class="tim-icons icon-zoom-split"></i>
+                                                </a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

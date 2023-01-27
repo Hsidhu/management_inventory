@@ -1,4 +1,4 @@
-@extends('layouts.app', ['page' => 'Sales', 'pageSlug' => 'sales', 'section' => 'transactions'])
+@extends('layouts.app', ['page' => 'Checkout Products', 'pageSlug' => 'sales', 'section' => 'transactions'])
 
 @section('content')
     @include('alerts.success')
@@ -11,7 +11,7 @@
                             <h4 class="card-title">Sales</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Register Sale</a>
+                            <a href="{{ route('sales.create') }}" class="btn btn-sm btn-primary">Checkout Products</a>
                         </div>
                     </div>
                 </div>

@@ -7,10 +7,10 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-8">
-                            <h4 class="card-title">Expenses (item_received)</h4>
+                            <h4 class="card-title">Stock Received</h4>
                         </div>
                         <div class="col-4 text-right">
-                            <a href="{{ route('transactions.create', ['type' => 'item_received']) }}" class="btn btn-sm btn-primary">Register Expense</a>
+                            <a href="{{ route('transactions.index') }}" class="btn btn-sm btn-primary">Back to Transactions</a>
                         </div>
                     </div>
                 </div>

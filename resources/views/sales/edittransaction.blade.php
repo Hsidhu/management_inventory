@@ -21,7 +21,6 @@
                             @method('put')
 
                             <input type="hidden" name="sale_id" value="{{ $sale->id }}">
-                            <input type="hidden" name="client_id" value="{{ $sale->client_id }}">
                             <input type="hidden" name="user_id" value="{{ $sale->user_id }}">
 
                             <h6 class="heading-small text-muted mb-4">Transaction Information</h6>
